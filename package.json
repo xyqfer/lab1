@@ -1,0 +1,25 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyqfer/lab1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xyqfer/lab1/issues"
+  },
+  "homepage": "https://github.com/xyqfer/lab1#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "ytdl-core": "^0.29.7"
+  }
+}
