@@ -36,7 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/api/deploy', require('./api/deploy'));
+app.post('/api/deploy', require('../api/deploy'));
 
 module.exports = async function start() {
   // Init Nuxt.js

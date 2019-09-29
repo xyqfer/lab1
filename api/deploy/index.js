@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = (req, res) => {
-    const rp = require('request-promise');
+const rp = require('request-promise');
 
+module.exports = (req, res) => {
     try {
         const { ref } = req.body;
 
