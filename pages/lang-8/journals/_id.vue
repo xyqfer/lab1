@@ -47,7 +47,13 @@ export default {
         let { page = 1 } = query;
         page = parseInt(page);
 
-        const response = await $axios.get(`http://lang-8.com/${id}/journals?page=${page}`);
+        const response = await $axios({
+            method: 'get',
+            url: `http://lang-8.com/${id}/journals?page=${page}`,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36',
+            },
+        });
         const $ = cheerio.load(response.data);
         const listData = $('.journals_flex')
             .map((index, elem) => {

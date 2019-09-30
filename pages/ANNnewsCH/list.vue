@@ -16,19 +16,7 @@
                     <div class="news-item__btn-container">
                         <button @click="fetchFurigana(index)">Furigana</button>
                     </div>
-                    <div class="news-item__word-list" v-if="item.wordList.length > 0">
-                        <div class="news-item__word-wrap" v-for="(word, i) in item.wordList" :key="i">
-                            <div class="news-item__word-item">
-                                {{word.text}}
-                            </div>
-                            <div :class="{'news-item__word-item': true, hide: !word.showFurigana}" @click="toggleFurigana(index, i)">
-                                {{word.furigana}}
-                            </div>
-                        </div>
-                        <div class="news-item__word-reset">
-                            <button @click="resetWordList(index)">Reset</button>
-                        </div>
-                    </div>
+                    <WordList :words="item.wordList"></WordList>
                 </div>
             </template>
         </Render0>
@@ -37,6 +25,8 @@
 
 <script>
 import Render0 from '~/components/Render0.vue';
+import WordList from '~/components/WordList.vue';
+import parseFurigana from '~/utils/parseFurigana';
 
 const Parser = require('rss-parser');
 const parser = new Parser();
@@ -44,6 +34,7 @@ const parser = new Parser();
 export default {
     components: {
         Render0,
+        WordList,
     },
 
     layout: 'archive0',
@@ -68,7 +59,6 @@ export default {
         const feed = await parser.parseURL(`${process.env.RSS_HOST}/youtube/podcast/user/ANNnewsCH`);
         const listData = feed.items.slice(offset, offset + count).map((item) => {
             item.wordList = [];
-
             return item;
         });
 
@@ -98,40 +88,10 @@ export default {
             const result = await response.json();
 
             if (result.success) {
-                const wordList = [];
-                const content = result.data.list.reduce((acc, { text, furigana }) => {
-                    if (furigana !== '' && text !== furigana && !text.includes('|')) {
-                        wordList.push({
-                            text,
-                            furigana,
-                            showFurigana: false,
-                        });
-                    }
-
-                    let html = '';
-                    if (text.includes('|')) {
-                        html = text.replace(/\|/g, '<br>');
-                    } else {
-                        html = `<ruby>${text}<rt>${furigana}</rt></ruby>`;
-                    }
-                    acc += html;
-                    return acc;
-                }, '');
-
-                this.listData[index].content = content;
+                const { wordList, htmlContent, } = parseFurigana(result.data.list);
+                this.listData[index].content = htmlContent;
                 this.listData[index].wordList = wordList;
             }
-        },
-
-        toggleFurigana(index, i) {
-            const state = !this.listData[index].wordList[i].showFurigana;
-            this.listData[index].wordList[i].showFurigana = state;
-        },
-
-        resetWordList(index) {
-            this.listData[index].wordList.forEach((item) => {
-                item.showFurigana = false;
-            });
         },
     },
 }
@@ -147,28 +107,6 @@ export default {
 
     &__btn-container {
         margin-top: 10px;
-    }
-
-    &__word-list {
-        margin-top: 20px;
-    }
-
-    &__word-wrap {
-        display: flex;
-        margin-bottom: 10px;
-    }
-
-    &__word-item {
-        width: 50%;
-        text-align: center;
-
-        &.hide {
-            opacity: 0;
-        }
-    }
-
-    &__word-reset {
-        margin-top: 30px;
     }
 }
 </style>

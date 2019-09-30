@@ -10,19 +10,7 @@
                     <div v-html="item.zh"></div>
                 </div>
 
-                <div class="article__word-list" v-if="wordList.length > 0">
-                    <div class="article__word-wrap" v-for="(word, i) in wordList" :key="i">
-                        <div class="article__word-item">
-                            {{word.text}}
-                        </div>
-                        <div :class="{'article__word-item': true, hide: !word.showFurigana}" @click="toggleFurigana(i)">
-                            {{word.furigana}}
-                        </div>
-                    </div>
-                    <div class="article__word-reset">
-                        <button @click="resetWordList(i)">Reset</button>
-                    </div>
-                </div>
+                <WordList :words="wordList"></WordList>
             </template>
         </Render0>
     </div>
@@ -30,6 +18,8 @@
 
 <script>
 import Render0 from '~/components/Render0.vue';
+import WordList from '~/components/WordList.vue';
+import parseFurigana from '~/utils/parseFurigana';
 
 const cheerio = require('cheerio');
 const qs = require('querystring');
@@ -37,6 +27,7 @@ const qs = require('querystring');
 export default {
     components: {
         Render0,
+        WordList,
     },
 
     layout: 'archive0',
@@ -73,27 +64,8 @@ export default {
                 content: rawJPContent,
             }),
         });
-        const wordList = [];
-        let jpCotent = '';
-        translatedData.data.data.list.forEach(({ text, furigana }) => {
-            if (furigana !== '' && text !== furigana && !text.includes('|')) {
-                wordList.push({
-                    text,
-                    furigana,
-                    showFurigana: false,
-                });
-            }
-
-            let html = '';
-            if (text.includes('|')) {
-                html = text.replace(/\|/g, '<br>');
-            } else {
-                html = `<ruby>${text}<rt>${furigana}</rt></ruby>`;
-            }
-
-            jpCotent += html;
-        });
-        const jpCotentList = jpCotent.split('<br>').filter(isValidItem);
+        const { wordList, htmlContent } = parseFurigana(translatedData.data.data.list);
+        const jpCotentList = htmlContent.split('<br>').filter(isValidItem);
         const listData = jpCotentList.map((item, index) => {
             return {
                 jp: item,
@@ -109,16 +81,7 @@ export default {
     },
 
     methods: {
-        toggleFurigana(i) {
-            const state = !this.wordList[i].showFurigana;
-            this.wordList[i].showFurigana = state;
-        },
-
-        resetWordList(i) {
-            this.wordList[i].forEach((item) => {
-                item.showFurigana = false;
-            });
-        },
+        
     },
 }
 </script>
@@ -131,28 +94,6 @@ export default {
         &__jp {
             margin-bottom: 10px;
         }
-    }
-
-    &__word-list {
-        margin-top: 20px;
-    }
-
-    &__word-wrap {
-        display: flex;
-        margin-bottom: 10px;
-    }
-
-    &__word-item {
-        width: 50%;
-        text-align: center;
-
-        &.hide {
-            opacity: 0;
-        }
-    }
-
-    &__word-reset {
-        margin-top: 30px;
     }
 }
 </style>
