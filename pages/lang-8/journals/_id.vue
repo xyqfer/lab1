@@ -28,7 +28,6 @@
 import Render0 from '~/components/Render0.vue';
 
 const cheerio = require('cheerio');
-const rp = require('request-promise');
 
 export default {
     components: {
@@ -43,15 +42,13 @@ export default {
         };
     },
 
-    async asyncData({ params, query }) {
+    async asyncData({ params, query, $axios, }) {
         const { id } = params;
         let { page = 1 } = query;
         page = parseInt(page);
 
-        const htmlString = await rp.get({
-            uri: `http://lang-8.com/${id}/journals?page=${page}`,
-        });
-        const $ = cheerio.load(htmlString);
+        const response = await $axios.get(`http://lang-8.com/${id}/journals?page=${page}`);
+        const $ = cheerio.load(response.data);
         const listData = $('.journals_flex')
             .map((index, elem) => {
                 elem = $(elem);

@@ -32,7 +32,7 @@
 import Render0 from '~/components/Render0.vue';
 
 const cheerio = require('cheerio');
-const rp = require('request-promise');
+const qs = require('querystring');
 
 export default {
     components: {
@@ -47,13 +47,11 @@ export default {
         };
     },
 
-    async asyncData({ params }) {
+    async asyncData({ params, $axios }) {
         const { userId, articleId, } = params;
-        const htmlString = await rp.get({
-            uri: `http://lang-8.com/${userId}/journals/${articleId}`,
-        });
+        const response = await $axios.get(`http://lang-8.com/${userId}/journals/${articleId}`);
 
-        const $ = cheerio.load(htmlString);
+        const $ = cheerio.load(response.data);
         const title = $('#subject_show').text();
 
         const isValidItem = (item) => {
@@ -63,16 +61,19 @@ export default {
         zhContent = [title].concat(zhContent);
 
         const rawJPContent = $('#body_show_mo').html().replace(/<br>/g, '|');
-        const translatedData = await rp.post({
-            uri: `${process.env.API_HOST}/api/v1/furigana/translate`,
-            form: {
-                content: rawJPContent,
+        const translatedData = await $axios({
+            url: `${process.env.API_HOST}/api/v1/furigana/translate`,
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            json: true,
+            data: qs.stringify({
+                content: rawJPContent,
+            })
         });
         const wordList = [];
         let jpCotent = '';
-        translatedData.data.list.forEach(({ text, furigana }) => {
+        translatedData.data.data.list.forEach(({ text, furigana }) => {
             if (furigana !== '' && text !== furigana && text !== '|') {
                 wordList.push({
                     text,
