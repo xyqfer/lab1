@@ -37,15 +37,11 @@
 
 <script>
 import Render0 from '~/components/Render0.vue';
-import { asyncData } from '~/mixin/env';
 
 const Parser = require('rss-parser');
 const parser = new Parser();
-const { API_HOST } = process.env;
 
 export default {
-    mixins: [asyncData],
-
     components: {
         Render0,
     },
@@ -78,6 +74,7 @@ export default {
 
         return {
             listData,
+            API_HOST: process.env.API_HOST,
         };
     },
 
