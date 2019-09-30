@@ -80,8 +80,9 @@ export default {
 
     methods: {
         async fetchFurigana(index) {
+            const content = this.listData[index].content.replace(/<br>/g, '|');
             const data = {
-                content: this.listData[index].content,
+                content,
             };
             const body = Object.entries(data).map(([key, value]) => {
                 return `${key}=${value}`;
@@ -99,7 +100,7 @@ export default {
             if (result.success) {
                 const wordList = [];
                 const content = result.data.list.reduce((acc, { text, furigana }) => {
-                    if (furigana !== '' && text !== furigana) {
+                    if (furigana !== '' && text !== furigana && text !== '|') {
                         wordList.push({
                             text,
                             furigana,
@@ -107,7 +108,13 @@ export default {
                         });
                     }
 
-                    acc += `<ruby>${text}<rt>${furigana}</rt></ruby>`;
+                    let html = '';
+                    if (text === '|') {
+                        html = '<br>';
+                    } else {
+                        html = `<ruby>${text}<rt>${furigana}</rt></ruby>`;
+                    }
+                    acc += html;
                     return acc;
                 }, '');
 
