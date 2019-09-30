@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="word-list" v-if="wordList.length > 0">
-            <div class="word-wrap" v-for="(word, index) in item.wordList" :key="index">
+            <div class="word-wrap" v-for="(word, index) in wordList" :key="index">
                 <div class="word-item">
                     {{word.text}}
                 </div>
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="word-reset">
-                <button @click="resetWordList(index)">Reset</button>
+                <button @click="resetWordList()">Reset</button>
             </div>
         </div>
     </div>
@@ -26,30 +26,38 @@ export default {
     },
 
     data() {
-        const wordList = this.words.map((item) => {
-            return {
-                showFurigana: false,
-                ...item,
-            };
-        });
-
         return {
-            wordList,
+            wordList: this.flushWordList(),
         };
     },
 
+    watch: {
+        words() {
+            this.wordList = this.flushWordList();
+        },
+    },
+
     methods: {
+        flushWordList() {
+            return this.words.map((item) => {
+                return {
+                    showFurigana: false,
+                    ...item,
+                };
+            });
+        },
+
         toggleFurigana(index) {
             const state = !this.wordList[index].showFurigana;
             this.wordList[index].showFurigana = state;
         },
 
-        resetWordList(index) {
-            this.wordList[index].forEach((item) => {
+        resetWordList() {
+            this.wordList.forEach((item) => {
                 item.showFurigana = false;
             });
         },
-    }
+    },
 }
 </script>
 
