@@ -51,7 +51,9 @@ export default {
         const [ userId, articleId, ] = route.params.pathMatch.split('/');
         const response = await $axios.get(`http://lang-8.com/${userId}/journals/${articleId}`);
 
-        const $ = cheerio.load(response.data);
+        const $ = cheerio.load(response.data, {
+            decodeEntities: false
+        });
         const title = $('#subject_show').text();
 
         const isValidItem = (item) => {
@@ -69,7 +71,7 @@ export default {
             },
             data: qs.stringify({
                 content: rawJPContent,
-            })
+            }),
         });
         const wordList = [];
         let jpCotent = '';
