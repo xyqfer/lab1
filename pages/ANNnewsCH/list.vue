@@ -40,6 +40,7 @@ import Render0 from '~/components/Render0.vue';
 
 const Parser = require('rss-parser');
 const parser = new Parser();
+const { API_HOST } = process.env;
 
 export default {
     components: {
@@ -86,7 +87,7 @@ export default {
                 return `${key}=${value}`;
             }).join('&');
 
-            const response = await fetch(`${process.env.API_HOST}/api/v1/furigana/translate`, {
+            const response = await fetch(`${API_HOST}/api/v1/furigana/translate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
