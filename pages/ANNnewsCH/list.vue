@@ -87,7 +87,7 @@ export default {
                 return `${key}=${value}`;
             }).join('&');
 
-            const response = await fetch(`${API_HOST}/api/v1/furigana/translate`, {
+            const response = await fetch(`${this.API_HOST}/api/v1/furigana/translate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
