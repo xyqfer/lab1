@@ -58,5 +58,9 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+
+  env: {
+    API_HOST: process.env.API_HOST,
+  },
 }
