@@ -100,7 +100,7 @@ export default {
             if (result.success) {
                 const wordList = [];
                 const content = result.data.list.reduce((acc, { text, furigana }) => {
-                    if (furigana !== '' && text !== furigana && text !== '|') {
+                    if (furigana !== '' && text !== furigana && !text.includes('|')) {
                         wordList.push({
                             text,
                             furigana,
@@ -109,8 +109,8 @@ export default {
                     }
 
                     let html = '';
-                    if (text === '|') {
-                        html = '<br>';
+                    if (text.includes('|')) {
+                        html = text.replace(/\|/g, '<br>');
                     } else {
                         html = `<ruby>${text}<rt>${furigana}</rt></ruby>`;
                     }

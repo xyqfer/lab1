@@ -47,8 +47,8 @@ export default {
         };
     },
 
-    async asyncData({ params, $axios }) {
-        const { userId, articleId, } = params;
+    async asyncData({ $axios, route }) {
+        const [ userId, articleId, ] = route.params.pathMatch.split('/');
         const response = await $axios.get(`http://lang-8.com/${userId}/journals/${articleId}`);
 
         const $ = cheerio.load(response.data);
@@ -74,7 +74,7 @@ export default {
         const wordList = [];
         let jpCotent = '';
         translatedData.data.data.list.forEach(({ text, furigana }) => {
-            if (furigana !== '' && text !== furigana && text !== '|') {
+            if (furigana !== '' && text !== furigana && !text.includes('|')) {
                 wordList.push({
                     text,
                     furigana,
@@ -83,8 +83,8 @@ export default {
             }
 
             let html = '';
-            if (text === '|') {
-                html = '<br>';
+            if (text.includes('|')) {
+                html = text.replace(/\|/g, '<br>');
             } else {
                 html = `<ruby>${text}<rt>${furigana}</rt></ruby>`;
             }
