@@ -5,7 +5,13 @@
                 {{title}}
             </template>
             <template #content>
-                
+                <div class="link-container" v-for="item in listData" :key="item.objectId">
+                    <a :href="`/nhk/easynews/article/${item.objectId}`" target="_blank">
+                        <h4>
+                            {{item.title}}
+                        </h4>
+                    </a>
+                </div>
             </template>
         </Render0>
     </div>
@@ -33,16 +39,21 @@ export default {
         };
     },
 
-    async asyncData({params, query, $axios}) {
+    async asyncData({ params, query, $axios }) {
         const { data } = await $axios({
             method: 'get',
             url: `${process.env.API_HOST}/api/v1/nhk/easynews`,
         });
-        const { htmlContentList, wordList} = data.data;
+
+        return {
+            listData: data.data.list,
+        };
     },
 }
 </script>
 
 <style lang="scss" scoped>
-
+.link-container {
+    margin-bottom: 30px;
+}
 </style>

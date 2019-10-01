@@ -6,17 +6,17 @@
             </template>
             <template #content>
                 <div>
+                    <a href="/nhk/easynews/list" class="link" target="_blank">
+                        NHK EasyNews
+                    </a>
+                    <a href="/nhk/webnews/list" class="link" target="_blank">
+                        NHK WebNews
+                    </a>
                     <a href="/ANNnewsCH/list" class="link" target="_blank">
                         ANNnewsCH
                     </a>
                     <a href="/lang-8/journals/1378154" class="link" target="_blank">
                         lang-8 oz
-                    </a>
-                    <a href="/ANNnewsCH/list" class="link" target="_blank">
-                        
-                    </a>
-                    <a href="/ANNnewsCH/list" class="link" target="_blank">
-                        
                     </a>
                 </div>
             </template>

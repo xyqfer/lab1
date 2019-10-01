@@ -7,7 +7,9 @@
             <template #content>
                 <div class="article-item" v-for="item in listData" :key="item.articleId">
                     <a :href="`/lang-8/article/${id}/${item.articleId}`" target="_blank">
-                        {{item.title}}
+                        <h4>
+                            {{item.title}}
+                        </h4>
                     </a>
                     <div>
                         {{item.description}}
