@@ -2,7 +2,7 @@
     <div>
         <Render0>
             <template #title>
-                Learn JP
+                {{title}}
             </template>
             <template #content>
                 <div>
@@ -33,6 +33,18 @@ export default {
     },
 
     layout: 'archive0',
+
+    data() {
+        return {
+            title: 'Learn JP',
+        };
+    },
+
+    head() {
+        return {
+            title: this.title,
+        };
+    },
 }
 </script>
 
