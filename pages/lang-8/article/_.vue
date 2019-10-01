@@ -17,19 +17,12 @@
 </template>
 
 <script>
-import Render0 from '~/components/Render0.vue';
-import WordList from '~/components/WordList.vue';
 import parseFurigana from '~/utils/parseFurigana';
 
 const cheerio = require('cheerio');
 const qs = require('querystring');
 
 export default {
-    components: {
-        Render0,
-        WordList,
-    },
-
     layout: 'archive0',
 
     head() {

@@ -16,15 +16,7 @@
 </template>
 
 <script>
-import Render0 from '~/components/Render0.vue';
-import WordList from '~/components/WordList.vue';
-
 export default {
-    components: {
-        Render0,
-        WordList,
-    },
-
     layout: 'archive0',
 
     head() {

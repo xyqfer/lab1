@@ -25,13 +25,7 @@
 </template>
 
 <script>
-import Render0 from '~/components/Render0.vue';
-
 export default {
-    components: {
-        Render0,
-    },
-
     layout: 'archive0',
 
     data() {

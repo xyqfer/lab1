@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import Render0 from '~/components/Render0.vue';
-import WordList from '~/components/WordList.vue';
 import parseFurigana from '~/utils/parseFurigana';
 import mixin from '~/mixin/Render0';
 
@@ -34,11 +32,6 @@ const parser = new Parser();
 
 export default {
     mixins: [mixin],
-
-    components: {
-        Render0,
-        WordList,
-    },
 
     data() {
         return {

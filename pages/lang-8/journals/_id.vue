@@ -27,15 +27,9 @@
 </template>
 
 <script>
-import Render0 from '~/components/Render0.vue';
-
 const cheerio = require('cheerio');
 
 export default {
-    components: {
-        Render0,
-    },
-
     layout: 'archive0',
 
     head() {
