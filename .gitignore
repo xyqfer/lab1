@@ -101,3 +101,4 @@ sw.*
 # Vim swap files
 *.swp
 
+env.js
