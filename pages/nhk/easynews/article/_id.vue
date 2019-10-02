@@ -5,8 +5,8 @@
                 {{title}}
             </template>
             <template #content>
-                <div>
-                    {{title}}
+                <div class="rtl-link">
+                    <a :href="`/nhk/easynews/article-rtl/${id}`" target="_blank">横版阅读</a>
                 </div>
                 <div>
                     <video loop controls webkit-playsinline playsinline :src="audioUrl"></video>
@@ -46,6 +46,7 @@ export default {
         const { title, audioUrl, htmlContentList, wordList, dicList, } = data.data;
 
         return {
+            id,
             title,
             audioUrl,
             htmlContentList,
@@ -57,6 +58,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.rtl-link {
+    margin-bottom: 20px;
+}
+
 .news-content {
     margin-top: 20px;
 

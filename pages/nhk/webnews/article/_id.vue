@@ -5,9 +5,6 @@
                 {{title}}
             </template>
             <template #content>
-                <div>
-                    {{title}}
-                </div>
                 <div class="news-content" v-html="htmlContent"></div>
                 <WordList :words="wordList"></WordList>
             </template>
