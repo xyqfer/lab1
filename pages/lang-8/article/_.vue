@@ -18,18 +18,13 @@
 
 <script>
 import parseFurigana from '~/utils/parseFurigana';
+import mixin from '~/mixin/Render0';
 
 const cheerio = require('cheerio');
 const qs = require('querystring');
 
 export default {
-    layout: 'archive0',
-
-    head() {
-        return {
-            title: this.title,
-        };
-    },
+    mixins: [mixin],
 
     async asyncData({ $axios, route }) {
         const [ userId, articleId, ] = route.params.pathMatch.split('/');

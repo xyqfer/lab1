@@ -16,14 +16,10 @@
 </template>
 
 <script>
-export default {
-    layout: 'archive0',
+import mixin from '~/mixin/Render0';
 
-    head() {
-        return {
-            title: this.title,
-        };
-    },
+export default {
+    mixins: [mixin],
 
     async asyncData({ params, $axios }) {
         const { id } = params;

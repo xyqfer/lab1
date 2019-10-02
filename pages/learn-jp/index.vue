@@ -25,18 +25,14 @@
 </template>
 
 <script>
+import mixin from '~/mixin/Render0';
+
 export default {
-    layout: 'archive0',
+    mixins: [mixin],
 
     data() {
         return {
             title: 'Learn JP',
-        };
-    },
-
-    head() {
-        return {
-            title: this.title,
         };
     },
 }

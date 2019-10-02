@@ -27,16 +27,12 @@
 </template>
 
 <script>
+import mixin from '~/mixin/Render0';
+
 const cheerio = require('cheerio');
 
 export default {
-    layout: 'archive0',
-
-    head() {
-        return {
-            title: this.title,
-        };
-    },
+    mixins: [mixin],
 
     async asyncData({ params, query, $axios, }) {
         const { id } = params;
