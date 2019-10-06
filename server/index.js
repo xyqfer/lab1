@@ -40,9 +40,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(deployMiddleware({
-  branch: 'f7-dev',
-}));
+// app.use(deployMiddleware({
+//   branch: 'f7-dev',
+// }));
 
 module.exports = async function start() {
   // Init Nuxt.js
