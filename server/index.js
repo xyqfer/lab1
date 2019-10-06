@@ -34,15 +34,15 @@ app.use(cors({
 
 app.use((req, res, next) => {
     const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    if (ip.isPrivate(ipAddress)) {
+    if (!ip.isPrivate(ipAddress)) {
       console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
     }
     next();
 });
 
-// app.use(deployMiddleware({
-//   branch: 'f7-dev',
-// }));
+app.use(deployMiddleware({
+  branch: 'f7-dev',
+}));
 
 module.exports = async function start() {
   // Init Nuxt.js
