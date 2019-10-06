@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/xyqfer/lab1#readme",
   "dependencies": {
+    "@leancloud/client-engine": "^0.8.0-beta.0",
+    "@leancloud/play": "^0.18.0-beta.5",
     "@xyqfer/deploy-middleware": "^1.0.2",
     "@xyqfer/init-leancloud-engine": "^1.1.1",
     "bluebird": "^3.5.5",
@@ -43,6 +45,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "rss-parser": "^3.7.2",
+    "rxjs": "^6.5.3",
     "sass-loader": "^8.0.0",
     "ytdl-core": "^0.29.7"
   },
