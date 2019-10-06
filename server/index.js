@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const AV = require('leanengine');
 const { Nuxt, Builder } = require('nuxt');
+const ip = require('ip');
+const deployMiddleware = require('@xyqfer/deploy-middleware');
 
 const app = express();
 
@@ -32,12 +34,15 @@ app.use(cors({
 
 app.use((req, res, next) => {
     const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
+    if (ip.isPrivate(ipAddress)) {
+      console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
+    }
     next();
 });
 
-app.post('/api/deploy', require('../api/deploy'));
-app.get('/api/wake', require('../api/wake'));
+app.use(deployMiddleware({
+  branch: 'f7-dev',
+}));
 
 module.exports = async function start() {
   // Init Nuxt.js
@@ -53,6 +58,5 @@ module.exports = async function start() {
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
-
   return app;
 }
