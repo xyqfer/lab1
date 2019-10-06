@@ -34,6 +34,7 @@
     "cors": "^2.8.5",
     "cross-env": "^6.0.0",
     "express": "^4.17.1",
+    "fibers": "^4.0.1",
     "framework7": "^4.5.2",
     "framework7-vue": "^4.5.2",
     "ip": "^1.1.5",
@@ -46,6 +47,7 @@
     "request-promise": "^4.2.4",
     "rss-parser": "^3.7.2",
     "rxjs": "^6.5.3",
+    "sass": "^1.23.0",
     "sass-loader": "^8.0.0",
     "ytdl-core": "^0.29.7"
   },
