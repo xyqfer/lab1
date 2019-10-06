@@ -3,7 +3,6 @@ const timeout = require('connect-timeout');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const AV = require('leanengine');
 const { Nuxt, Builder } = require('nuxt');
 const ip = require('ip');
 const deployMiddleware = require('@xyqfer/deploy-middleware');
@@ -17,12 +16,7 @@ config.dev = process.env.NODE_ENV !== 'production';
 // 设置默认超时时间
 app.use(timeout('600s'));
 
-// 加载云引擎中间件
-app.use(AV.express());
-
 app.enable('trust proxy');
-// 需要重定向到 HTTPS
-app.use(AV.Cloud.HttpsRedirect());
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
