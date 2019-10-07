@@ -13,6 +13,7 @@ module.exports = async (context) => {
         } else {
             await nuxt.ready()
         }
+        context.use(nuxt.render);
     };
 
     if (process.env.NODE_ENV === 'production') {
@@ -23,6 +24,5 @@ module.exports = async (context) => {
         await initNuxt();
     }
 
-    context.use(nuxt.render);
     console.log('finish build nuxt');
 };
