@@ -31,12 +31,23 @@ export default {
 
     async asyncData({ params, query, $axios }) {
         const { data } = await $axios({
-            method: 'get',
-            url: `${process.env.API_HOST}/api/v1/nhk/webnews`,
+            method: 'post',
+            url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
+            headers: {
+                'Content-Type': 'application/graphql',
+            },
+            data: `
+                {
+                    NHKWebNews(descending:createdAt, limit: 20) {
+                        title,
+                        objectId,
+                    }
+                }
+            `,
         });
 
         return {
-            listData: data.data.list,
+            listData: data.data.NHKWebNews,
         };
     },
 }

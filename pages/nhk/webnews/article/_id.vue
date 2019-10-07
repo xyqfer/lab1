@@ -21,16 +21,23 @@ export default {
     async asyncData({ params, $axios }) {
         const { id } = params;
         const { data } = await $axios({
-            method: 'get',
-            url: `${process.env.API_HOST}/api/v1/nhk/webnews/article/${id}`,
+            method: 'post',
+            url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
+            headers: {
+                'Content-Type': 'application/graphql',
+            },
+            data: `
+                {
+                    NHKWebNews(equalTo: {objectId: "${id}"}, limit: 1) {
+                        title,
+                        htmlContent,
+                        wordList,
+                    }
+                }
+            `,
         });
-        const { title, htmlContent, wordList, } = data.data;
 
-        return {
-            title, 
-            htmlContent, 
-            wordList,
-        };
+        return data.data.NHKWebNews[0];
     },
 }
 </script>
