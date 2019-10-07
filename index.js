@@ -1,7 +1,7 @@
 'use strict';
 
-const { initCloudEngine } = require('@xyqfer/init-leancloud-engine');
-initCloudEngine();
+const { init } = require('@xyqfer/init-leancloud-engine');
+init();
 
 const getPort = require('@xyqfer/get-port');
 const app = require('./server');
