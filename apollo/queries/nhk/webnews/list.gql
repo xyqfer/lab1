@@ -1,0 +1,6 @@
+query {
+    listData: NHKWebNews(descending:createdAt, limit: 20,) {
+        title
+        objectId
+    }
+}

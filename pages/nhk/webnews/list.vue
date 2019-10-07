@@ -19,35 +19,21 @@
 
 <script>
 import mixin from '~/mixin/Render0';
+import list from '~/apollo/queries/nhk/webnews/list';
 
 export default {
+    apollo: {
+        listData: {
+            prefetch: true,
+            query: list,
+        },
+    },
+
     mixins: [mixin],
 
     data() {
         return {
             title: 'NHK-WebNews',
-        };
-    },
-
-    async asyncData({ params, query, $axios }) {
-        const { data } = await $axios({
-            method: 'post',
-            url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
-            headers: {
-                'Content-Type': 'application/graphql',
-            },
-            data: `
-                {
-                    NHKWebNews(descending:createdAt, limit: 20) {
-                        title,
-                        objectId,
-                    }
-                }
-            `,
-        });
-
-        return {
-            listData: data.data.NHKWebNews,
         };
     },
 }

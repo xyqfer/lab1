@@ -51,6 +51,7 @@ module.exports = {
    */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/apollo',
   ],
   /*
    ** Build configuration
@@ -64,5 +65,18 @@ module.exports = {
 
   env: {
 
+  },
+
+  modern: true,
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
+      },
+      test: {
+        httpEndpoint: 'http://localhost:3000',
+      },
+    },
   },
 }

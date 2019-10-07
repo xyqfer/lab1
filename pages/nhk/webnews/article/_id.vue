@@ -2,11 +2,11 @@
     <div>
         <Render0>
             <template #title>
-                {{title}}
+                {{articleData.title}}
             </template>
             <template #content>
-                <div class="news-content" v-html="htmlContent"></div>
-                <WordList :words="wordList"></WordList>
+                <div class="news-content" v-html="articleData.htmlContent"></div>
+                <WordList :words="articleData.wordList"></WordList>
             </template>
         </Render0>
     </div>
@@ -14,30 +14,34 @@
 
 <script>
 import mixin from '~/mixin/Render0';
+import article from '~/apollo/queries/nhk/webnews/article';
 
 export default {
+    apollo: {
+        articleData: {
+            query: article,
+            prefetch: ({ route }) => ({ id: route.params.id }),
+            variables () {
+                return { id: this.$route.params.id }
+            },
+            update: (data) => {
+                return data.articleData[0];
+            },
+        },
+    },
+
     mixins: [mixin],
 
-    async asyncData({ params, $axios }) {
-        const { id } = params;
-        const { data } = await $axios({
-            method: 'post',
-            url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
-            headers: {
-                'Content-Type': 'application/graphql',
-            },
-            data: `
-                {
-                    NHKWebNews(equalTo: {objectId: "${id}"}, limit: 1) {
-                        title,
-                        htmlContent,
-                        wordList,
-                    }
-                }
-            `,
-        });
+    data() {
+        return {
+            title: '',
+        };
+    },
 
-        return data.data.NHKWebNews[0];
+    watch: {
+        articleData({ title }) {
+            this.title = title;
+        },
     },
 }
 </script>
