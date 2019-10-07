@@ -17,7 +17,8 @@ module.exports = async (context) => {
     };
 
     if (process.env.NODE_ENV === 'production') {
-        exec('npm run build', async () => {
+        exec('npm run build', async (error, stdout, stderr) => {
+            console.log(error, stdout, stderr);
             await initNuxt();
         });
     } else {
