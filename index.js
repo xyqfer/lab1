@@ -3,10 +3,15 @@
 const { initCloudEngine } = require('@xyqfer/init-leancloud-engine');
 initCloudEngine();
 
-const getPort = require('@xyqfer/get-port');
-const createApp = require('./server');
+if (process.env.NODE_ENV === 'production') {
+  const { execSync } = require('child_process');
+  execSync('npm run build');
+}
 
 (async () => {
+  const getPort = require('@xyqfer/get-port');
+  const createApp = require('./server');
+
   const app = await createApp();
   const PORT = await getPort();
 

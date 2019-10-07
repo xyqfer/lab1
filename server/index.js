@@ -48,12 +48,10 @@ module.exports = async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   } else {
-    await require('@nuxt/cli').run('build');
     await nuxt.ready()
   }
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
-
   return app;
 }
