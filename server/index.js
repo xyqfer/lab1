@@ -38,10 +38,6 @@ app.use(deployMiddleware({
   branch: 'f7-dev',
 }));
 
-app.get('/', (req, res) => {
-  res.send('this is home page');
-});
-
 module.exports = async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
