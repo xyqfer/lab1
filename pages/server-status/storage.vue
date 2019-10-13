@@ -56,7 +56,7 @@ export default {
 
         return {
             date,
-            listData: data.data.list,
+            listData: data.data.list.reverse(),
             totalCount,
         };
     },
