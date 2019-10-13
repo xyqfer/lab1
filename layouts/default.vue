@@ -1,5 +1,5 @@
 <template>
-  <f7-app :params="{ theme: 'auto', routes, name: 'My App', id: 'com.demoapp.test' }">
+  <f7-app :params="{ theme: 'ios', routes, name: 'My F7 App', id: 'com.f7.dev' }">
         <!-- Status bar overlay for full screen mode (Cordova or PhoneGap) -->
         <f7-statusbar></f7-statusbar>
         <!-- Your main view, should have "main" prop -->
