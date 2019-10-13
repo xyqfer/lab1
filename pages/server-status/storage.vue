@@ -6,21 +6,29 @@
             </template>
             <template #content>
                 <div class="date">
-                    {{date}}
+                    {{date}} 共 {{totalCount}}
                 </div>
                 <div class="list-container" v-for="item in listData" :key="item.name">
-                    <div class="list-item">
+                    <div class="list-item list-item1">
                         {{item.name}}
                     </div>
-                    <div class="list-item">
+                    <div class="list-item list-item2">
                         {{item.count}}
                     </div>
-                    <div class="list-item">
+                    <div class="list-item list-item3">
                         {{(item.percent * 100).toFixed(4)}}%
                     </div>
                 </div>
-                <div class="total-count">
-                    共 {{totalCount}}
+                <div class="list-container">
+                    <div class="list-item list-item1">
+
+                    </div>
+                    <div class="list-item list-item2">
+                        {{totalCount}}
+                    </div>
+                    <div class="list-item list-item3">
+                        
+                    </div>
                 </div>
             </template>
         </Render0>
@@ -65,8 +73,20 @@ export default {
 }
 
 .list-item {
-    flex: 1;
-    text-align: center;
+    flex: 2;
+
+    &.list-item1 {
+        text-align: left;
+    }
+
+    &.list-item2 {
+        flex: 1;
+        text-align: center;
+    }
+
+    &.list-item3 {
+        text-align: right;
+    }
 }
 
 .total-count {

@@ -19,7 +19,7 @@
 
 <script>
 import mixin from '~/mixin/Render0';
-import { request } from 'graphql-request'
+import { request } from 'graphql-request';
 
 export default {
     mixins: [mixin],
@@ -30,39 +30,20 @@ export default {
         };
     },
 
-    async asyncData({ params, $axios }) {
-
+    async asyncData({ params, }) {
         const endpoint = `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`;
+        const query = `
+            query {
+                NHKWebNews(descending:createdAt, limit: 20) {
+                    title
+                    objectId
+                }
+            }
+        `;
 
-  const query = /* GraphQL */ `
-    query {
-        NHKWebNews(descending:createdAt, limit: 20) {
-        title,
-        objectId,
-        }
-    }
-  `
-
-  const data = await request(endpoint, query)
-
-        // const { data } = await $axios({
-        //     method: 'post',
-        //     url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
-        //     headers: {
-        //         'Content-Type': 'application/graphql',
-        //     },
-        //     data: `
-        //         {
-        //             NHKWebNews(descending:createdAt, limit: 20) {
-        //                 title,
-        //                 objectId,
-        //             }
-        //         }
-        //     `,
-        // });
-
+        const { NHKWebNews } = await request(endpoint, query);
         return {
-            listData: data.NHKWebNews,
+            listData: NHKWebNews,
         };
     },
 }

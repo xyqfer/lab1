@@ -14,30 +14,28 @@
 
 <script>
 import mixin from '~/mixin/Render0';
+import { request } from 'graphql-request';
 
 export default {
     mixins: [mixin],
 
-    async asyncData({ params, $axios }) {
+    async asyncData({ params, }) {
         const { id } = params;
-        const { data } = await $axios({
-            method: 'post',
-            url: `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`,
-            headers: {
-                'Content-Type': 'application/graphql',
-            },
-            data: `
-                {
-                    NHKWebNews(equalTo: {objectId: "${id}"}, limit: 1) {
-                        title,
-                        htmlContent,
-                        wordList,
-                    }
+        const endpoint = `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`;
+        const query = `
+            query($id: String) {
+                NHKWebNews(equalTo: {objectId: $id}, limit: 1) {
+                    title
+                    htmlContent
+                    wordList
                 }
-            `,
-        });
+            }
+        `;
 
-        return data.data.NHKWebNews[0];
+        const { NHKWebNews, } = await request(endpoint, query, {
+            id,
+        });
+        return NHKWebNews[0];
     },
 }
 </script>
