@@ -1,7 +1,7 @@
 import Home from '../pages/kitchen-sink/home.vue';
 import PanelLeft from '../pages/kitchen-sink/panel-left.vue';
 import PanelRight from '../pages/kitchen-sink/panel-right.vue';
-import About from '../pages/kitchen-sink/about.vue';
+import About from () => import('../pages/kitchen-sink/about.vue');
 
 import Accordion from '../pages/kitchen-sink/accordion.vue';
 import ActionSheet from '../pages/kitchen-sink/action-sheet.vue';

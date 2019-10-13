@@ -66,4 +66,6 @@ module.exports = {
   env: {
 
   },
+
+  modern: true,
 }
