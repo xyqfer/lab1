@@ -1,8 +1,6 @@
 import Home from '../pages/kitchen-sink/home.vue';
 import PanelLeft from '../pages/kitchen-sink/panel-left.vue';
 import PanelRight from '../pages/kitchen-sink/panel-right.vue';
-import About from () => import('../pages/kitchen-sink/about.vue');
-
 import Accordion from '../pages/kitchen-sink/accordion.vue';
 import ActionSheet from '../pages/kitchen-sink/action-sheet.vue';
 import Appbar from '../pages/kitchen-sink/appbar.vue';
@@ -122,7 +120,12 @@ export default [
   // About page
   {
     path: '/about/',
-    component: About,
+    async(routeTo, routeFrom, resolve, reject) {
+      const vueComponent = () => import('../pages/kitchen-sink/about.vue');
+      vueComponent().then((vc) => {
+        resolve({ component: vc.default })
+      });
+    },
   },
   // Left Panel
   {
