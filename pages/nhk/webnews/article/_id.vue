@@ -14,34 +14,28 @@
 
 <script>
 import mixin from '~/mixin/Render0';
-import article from '~/apollo/queries/nhk/webnews/article';
+import { request } from 'graphql-request';
 
 export default {
-    apollo: {
-        articleData: {
-            query: article,
-            prefetch: ({ route }) => ({ id: route.params.id }),
-            variables () {
-                return { id: this.$route.params.id }
-            },
-            update: (data) => {
-                return data.articleData[0];
-            },
-        },
-    },
-
     mixins: [mixin],
 
-    data() {
-        return {
-            title: '',
-        };
-    },
+    async asyncData({ params, }) {
+        const { id } = params;
+        const endpoint = `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`;
+        const query = `
+            query($id: String) {
+                NHKWebNews(equalTo: {objectId: $id}, limit: 1) {
+                    title
+                    htmlContent
+                    wordList
+                }
+            }
+        `;
 
-    watch: {
-        articleData({ title }) {
-            this.title = title;
-        },
+        const { NHKWebNews, } = await request(endpoint, query, {
+            id,
+        });
+        return NHKWebNews[0];
     },
 }
 </script>

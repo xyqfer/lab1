@@ -52,7 +52,6 @@ export default {
 
         return {
             listData,
-            API_HOST: process.env.API_HOST,
         };
     },
 
@@ -66,7 +65,7 @@ export default {
                 return `${key}=${value}`;
             }).join('&');
 
-            const response = await fetch(`${this.API_HOST}/api/v1/furigana/translate`, {
+            const response = await fetch(`${this.$store.state.API_HOST}/api/v1/furigana/translate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'

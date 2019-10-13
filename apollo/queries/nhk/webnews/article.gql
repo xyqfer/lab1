@@ -1,7 +1,0 @@
-query($id: String) {
-    articleData: NHKWebNews(equalTo: {objectId: $id}, limit: 1) {
-        title
-        htmlContent
-        wordList
-    }
-}
