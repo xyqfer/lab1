@@ -2,11 +2,11 @@
     <div>
         <Render0>
             <template #title>
-                {{articleData.title}}
+                {{title}}
             </template>
             <template #content>
-                <div class="news-content" v-html="articleData.htmlContent"></div>
-                <WordList :words="articleData.wordList"></WordList>
+                <div class="news-content" v-html="htmlContent"></div>
+                <WordList :words="wordList"></WordList>
             </template>
         </Render0>
     </div>
