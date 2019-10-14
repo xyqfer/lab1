@@ -77,6 +77,8 @@ export default {
                 });
                 if (previousItem) {
                     item.change = item.count - previousItem.count;
+                } else {
+                    item.change = item.count;
                 }
             });
         }
