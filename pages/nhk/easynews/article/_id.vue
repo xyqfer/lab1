@@ -9,7 +9,12 @@
                     <a :href="`/nhk/easynews/article-rtl/${id}`" target="_blank">横版阅读</a>
                 </div>
                 <div>
-                    <video loop controls webkit-playsinline playsinline :src="audioUrl"></video>
+                    <video ref="video" loop controls webkit-playsinline playsinline :src="audioUrl"></video>
+                    <div>
+                        <button @click="changePlayRate(1.0)">1.0</button>
+                        <button @click="changePlayRate(1.5)">1.5</button>
+                        <button @click="changePlayRate(2.0)">2.0</button>
+                    </div>
                 </div>
                 <div class="news-content">
                     <div class="news-content__item" v-for="(item, index) in htmlContentList" :key="index">
@@ -53,6 +58,12 @@ export default {
             wordList,
             dicList,
         };
+    },
+
+    methods: {
+        changePlayRate(rate) {
+            this.$refs.video.playbackRate = rate;
+        },
     },
 }
 </script>
