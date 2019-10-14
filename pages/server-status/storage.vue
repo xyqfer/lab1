@@ -6,14 +6,14 @@
             </template>
             <template #content>
                 <div class="date">
-                    {{date}} 共 {{totalCount}} <span :class="{red: totalCountChange > 0}">+{{totalCountChange}}</span>
+                    {{date}} 共 {{totalCount}} <span :class="{red: totalCountChange > 0}">(+{{totalCountChange}})</span>
                 </div>
                 <div class="list-container" v-for="item in listData" :key="item.name">
                     <div class="list-item list-item1">
                         {{item.name}}
                     </div>
                     <div class="list-item list-item2">
-                        {{item.count}} <span :class="{red: item.change > 0}">+{{item.change}}</span>
+                        {{item.count}} <span :class="{red: item.change > 0}">(+{{item.change}})</span>
                     </div>
                     <div class="list-item list-item3">
                         {{(item.percent * 100).toFixed(4)}}%
@@ -24,7 +24,7 @@
 
                     </div>
                     <div class="list-item list-item2">
-                        {{totalCount}} <span :class="{red: totalCountChange > 0}">+{{totalCountChange}}</span>
+                        {{totalCount}} <span :class="{red: totalCountChange > 0}">(+{{totalCountChange}})</span>
                     </div>
                     <div class="list-item list-item3">
                         
