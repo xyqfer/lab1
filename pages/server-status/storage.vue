@@ -66,29 +66,27 @@ export default {
         };
     },
 
-    created() {
-        if (process.client) {
-            let previousData = localStorage.getItem(this.date);
-            if (previousData) {
-                const { listData, totalCount, } = JSON.parse(previousData);
-                this.totalCountChange = this.totalCount - totalCount;
-                this.listData.forEach((item) => {
-                    const previousItem = listData.find(({name}) => {
-                        return name === item.name;
-                    });
-                    if (previousItem) {
-                        item.change = item.count - previousItem.count;
-                    } else {
-                        item.change = item.count;
-                    }
+    mounted() {
+        let previousData = localStorage.getItem(this.date);
+        if (previousData) {
+            const { listData, totalCount, } = JSON.parse(previousData);
+            this.totalCountChange = this.totalCount - totalCount;
+            this.listData.forEach((item) => {
+                const previousItem = listData.find(({name}) => {
+                    return name === item.name;
                 });
-            }
-
-            localStorage.setItem(this.date, JSON.stringify({
-                listData: this.listData,
-                totalCount: this.totalCount,
-            }));
+                if (previousItem) {
+                    item.change = item.count - previousItem.count;
+                } else {
+                    item.change = item.count;
+                }
+            });
         }
+
+        localStorage.setItem(this.date, JSON.stringify({
+            listData: this.listData,
+            totalCount: this.totalCount,
+        }));
     },
 }
 </script>
