@@ -6,7 +6,7 @@
             </template>
             <template #content>
                 <div class="finish-text">
-                    完成度：{{finishedProblemsCount}} / {{total}}
+                    完成度：{{finishedProblemsCount}} / {{total}} = {{finishedPercent}}%
                 </div>
                 <div>
                     <svg ref="svg" :height="svgHeight" class="finish-graph">
@@ -49,15 +49,18 @@ export default {
             url: `${process.env.API_HOST}/api/v1/leetcode/status`,
         });
         const { total, finishedProblems, } = data.data;
+        const finishedProblemsCount = finishedProblems.length;
+        const finishedPercent = ((finishedProblemsCount / total) * 100).toFixed(4);
         const finishedProblemsMap = finishedProblems.reduce((acc, item) => {
             acc[item.index] = item;
             return acc;
         }, {});
 
         return {
-            total: 1229,
+            total,
             finishedProblemsMap,
-            finishedProblemsCount: 66,
+            finishedProblemsCount,
+            finishedPercent,
         };
     },
 
