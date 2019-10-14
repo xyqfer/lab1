@@ -75,7 +75,9 @@ export default {
                 const previousItem = listData.find(({name}) => {
                     return name === item.name;
                 });
-                item.change = item.count - previousItem.count;
+                if (previousItem) {
+                    item.change = item.count - previousItem.count;
+                }
             });
         }
 
