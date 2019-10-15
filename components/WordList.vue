@@ -56,6 +56,19 @@ export default {
             this.wordList.forEach((item) => {
                 item.showFurigana = false;
             });
+            this.logCount();
+        },
+
+        logCount() {
+            fetch(`${this.$store.state.API_HOST}/api/v1/jp/log`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    count: this.wordList.length,
+                }),
+            });
         },
     },
 }

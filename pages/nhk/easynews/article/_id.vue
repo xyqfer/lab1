@@ -96,5 +96,6 @@ export default {
 
 .def-item {
     margin-bottom: 10px;
+    overflow-x: scroll; 
 }
 </style>
