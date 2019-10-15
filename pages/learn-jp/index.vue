@@ -9,6 +9,9 @@
                     <a href="/nhk/easynews/list" class="link" target="_blank">
                         NHK EasyNews
                     </a>
+                    <a href="/nhk/easynews/wordlist" class="link" target="_blank">
+                        NHK EasyNews WordList
+                    </a>
                     <a href="/nhk/webnews/list" class="link" target="_blank">
                         NHK WebNews
                     </a>
