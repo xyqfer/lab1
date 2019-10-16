@@ -8,12 +8,15 @@
                 <div v-for="item in  errorInfoList" :key="item.name">
                     <template v-if="item.errorInfo.length > 0">
                         <h3>{{item.name}}</h3>
-                        <div class="info-block" v-for="errorInfo in item.errorInfo" :key="errorInfo.oid">
+                        <div class="info-block" v-for="errorInfo in item.errorInfo" :key="errorInfo.time + item.name">
                             <div class="info-time">
-                                {{errorInfo.displayTime}}
+                                {{errorInfo.time}}
                             </div>
                             <div class="info-content">
-                                {{errorInfo.content}}
+                                <div 
+                                    v-for="content in errorInfo.contentList" :key="content"
+                                    v-html="content"
+                                ></div>
                             </div>
                         </div>
                     </template>
