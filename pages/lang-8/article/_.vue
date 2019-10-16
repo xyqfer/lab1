@@ -6,10 +6,12 @@
             </template>
             <template #content>
                 <div class="article-item" v-for="(item, index) in listData" :key="index">
-                    <div class="article-item__jp" v-html="item.jp"></div>
+                    <div class="article-item__jp">
+                        <span v-html="item.jp"></span>
+                        <a :href="`https://jisho.org/search/${item.raw}`" target="_blank">Jisho</a>
+                    </div>
                     <div v-html="item.zh"></div>
                 </div>
-
                 <WordList :words="wordList"></WordList>
             </template>
         </Render0>
@@ -48,6 +50,7 @@ export default {
         zhContent = [title].concat(zhContent);
 
         const rawJPContent = $('#body_show_mo').html().replace(/<br>/g, '|');
+        const rawJPContentList = $('#body_show_mo').html().split('<br>').filter(isValidItem);
         const translatedData = await $axios({
             url: `${process.env.API_HOST}/api/v1/furigana/translate`,
             method: 'post',
@@ -64,6 +67,7 @@ export default {
             return {
                 jp: item,
                 zh: zhContent[index],
+                raw: rawJPContentList[index],
             };
         });
 
@@ -72,10 +76,6 @@ export default {
             listData,
             wordList,
         };
-    },
-
-    methods: {
-        
     },
 }
 </script>
