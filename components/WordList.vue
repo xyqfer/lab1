@@ -2,11 +2,11 @@
     <div>
         <div class="word-list" v-if="wordList.length > 0">
             <div class="word-wrap" v-for="(word, index) in wordList" :key="index">
-                <div class="word-item">
-                    {{word.text}}
-                </div>
                 <div :class="{'word-item': true, hide: !word.showFurigana}" @click="toggleFurigana(index)">
                     {{word.furigana}}
+                </div>
+                <div class="word-item">
+                    {{word.text}}
                 </div>
             </div>
             <div class="word-reset">
