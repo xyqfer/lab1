@@ -5,6 +5,10 @@
                 {{title}}
             </template>
             <template #content>
+                <form action="https://jisho.org/search" method="post" target="_blank">
+                    <input class="hide" type="text" :value="rawHtmlContent" name="keyword">
+                    <button type="submit">Jisho</button>
+                </form>
                 <div class="news-content" v-html="htmlContent"></div>
                 <WordList :words="wordList"></WordList>
             </template>
@@ -15,6 +19,8 @@
 <script>
 import mixin from '~/mixin/Render0';
 import { request } from 'graphql-request';
+
+const cheerio = require('cheerio');
 
 export default {
     mixins: [mixin],
@@ -35,7 +41,18 @@ export default {
         const { NHKWebNews, } = await request(endpoint, query, {
             id,
         });
-        return NHKWebNews[0];
+        const { title, htmlContent, wordList, } = NHKWebNews[0];
+        const containerId = 'CONTAINER_ID';
+        const $ = cheerio.load(`<div id="${containerId}">${htmlContent}</id>`);
+        $('rt').remove();
+        const rawHtmlContent = $(`#${containerId}`).text().trim();
+
+        return {
+            title,
+            htmlContent,
+            rawHtmlContent,
+            wordList,
+        };
     },
 }
 </script>
@@ -52,5 +69,9 @@ export default {
         width: 100%;
         box-sizing: border-box;
     }
+}
+
+.hide {
+    display: none;
 }
 </style>

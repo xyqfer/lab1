@@ -19,6 +19,7 @@
                 <div class="news-content">
                     <div class="news-content__item" v-for="(item, index) in htmlContentList" :key="index">
                         <p v-html="item"></p>
+                        <a :href="`https://jisho.org/search/${rawContentList[index]}`" target="_blank">Jisho</a>
                         <textarea rows="4" class="news-content__input"></textarea>
                     </div>
                 </div>
@@ -48,13 +49,14 @@ export default {
             method: 'get',
             url: `${process.env.API_HOST}/api/v1/nhk/easynews/article/${id}`,
         });
-        const { title, audioUrl, htmlContentList, wordList, dicList, } = data.data;
+        const { title, audioUrl, htmlContentList, rawContentList, wordList, dicList, } = data.data;
 
         return {
             id,
             title,
             audioUrl,
             htmlContentList,
+            rawContentList,
             wordList,
             dicList,
         };
