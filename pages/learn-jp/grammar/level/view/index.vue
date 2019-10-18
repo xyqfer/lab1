@@ -59,34 +59,25 @@ export default {
             const mean = $elem.find('.mark2-1').text();
             let example = [];
 
-            $elem.find('dl.toggle1 ul p').each(function() {
-                const text = $(this).text();
-                const splitList = text.split('/');
+            $elem.find('dl.toggle1 > dd > ul > li').each(function() {
+                const originText = $(this).text();
 
-                if (splitList.length === 2) {
-                    const raw = splitList[0];
-                    const zh = splitList[1];
-
+                if (originText.split('/').length === 2) {
+                    const [ raw, zh ] = originText.split('/');
                     example.push({
                         raw,
                         zh,
                     });
                     rawList.push(raw);
                 } else {
-                    const raw1 = splitList[0];
-                    let [ zh1, ...raw2 ] = splitList[1].split(/\b/);
-                    example.push({
-                        raw: raw1,
-                        zh: zh1,
+                    originText.split(/\n/).forEach((text) => {
+                        const [ raw, zh ] = text.split('/');
+                        example.push({
+                            raw,
+                            zh,
+                        });
+                        rawList.push(raw);
                     });
-                    rawList.push(raw1);
-
-                    raw2 = raw2.join('');
-                    example.push({
-                        raw: raw2,
-                        zh: splitList[2],
-                    });
-                    rawList.push(raw2);
                 }
             });
 
