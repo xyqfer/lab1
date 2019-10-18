@@ -24,6 +24,9 @@
                     <a href="/learn-jp/grammar" class="link" target="_blank">
                         JP Grammar
                     </a>
+                    <a href="/xbr" class="link" target="_blank">
+                        新标日
+                    </a>
                 </div>
             </template>
         </Render0>
