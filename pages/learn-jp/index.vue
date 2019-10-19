@@ -21,6 +21,9 @@
                     <a href="/lang-8/journals/1378154" class="link" target="_blank">
                         lang-8 oz
                     </a>
+                    <a href="/komachi" class="link" target="_blank">
+                        発言小町
+                    </a>
                     <a href="/learn-jp/grammar" class="link" target="_blank">
                         JP Grammar
                     </a>

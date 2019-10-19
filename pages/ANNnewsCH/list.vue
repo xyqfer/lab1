@@ -13,6 +13,10 @@
                         <video loop controls webkit-playsinline playsinline :src="item.enclosure.url"></video>
                     </div>
                     <div class="news-item__content" v-html="item.content"></div>
+                    <form action="https://jisho.org/search" method="post" target="_blank">
+                        <input class="hide" type="text" :value="item.rawContent" name="keyword">
+                        <button type="submit">Jisho</button>
+                    </form>
                     <div class="news-item__btn-container">
                         <button @click="fetchFurigana(index)">Furigana</button>
                     </div>
@@ -27,6 +31,7 @@
 import parseFurigana from '~/utils/parseFurigana';
 import mixin from '~/mixin/Render0';
 
+const cheerio = require('cheerio');
 const Parser = require('rss-parser');
 const parser = new Parser();
 
@@ -46,6 +51,8 @@ export default {
 
         const feed = await parser.parseURL(`${process.env.RSS_HOST}/youtube/podcast/user/ANNnewsCH`);
         const listData = feed.items.slice(offset, offset + count).map((item) => {
+            const $ = cheerio.load(item.content);
+            item.rawContent = cheerio.text($('body'));
             item.wordList = [];
             return item;
         });
@@ -95,5 +102,9 @@ export default {
     &__btn-container {
         margin-top: 10px;
     }
+}
+
+.hide {
+    display: none;
 }
 </style>

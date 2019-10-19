@@ -42,10 +42,9 @@ export default {
             id,
         });
         const { title, htmlContent, wordList, } = NHKWebNews[0];
-        const containerId = 'CONTAINER_ID';
-        const $ = cheerio.load(`<div id="${containerId}">${htmlContent}</id>`);
+        const $ = cheerio.load(htmlContent);
         $('rt').remove();
-        const rawHtmlContent = $(`#${containerId}`).text().trim();
+        const rawHtmlContent = cheerio.text($('body')).trim();
 
         return {
             title,
