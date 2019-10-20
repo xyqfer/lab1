@@ -7,11 +7,9 @@
             <template #content>
                 <div class="article-item" v-for="item in listData" :key="item.title">
                     <div>{{item.title}}</div>
+                    <TextTranslate :text="`${item.title} ${item.content}`" />
                     <div v-html="item.htmlContent"></div>
-                    <form action="https://jisho.org/search" method="post" target="_blank">
-                        <input class="hide" type="text" :value="`${item.title} ${item.content}`" name="keyword">
-                        <button type="submit">Jisho</button>
-                    </form>
+                    <TextTranslate :text="`${item.title} ${item.content}`" />
                 </div>
             </template>
         </Render0>

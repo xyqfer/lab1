@@ -5,10 +5,7 @@
                 {{title}}
             </template>
             <template #content>
-                <form action="https://jisho.org/search" method="post" target="_blank">
-                    <input class="hide" type="text" :value="rawHtmlContent" name="keyword">
-                    <button type="submit">Jisho</button>
-                </form>
+                <TextTranslate :text="rawHtmlContent" />
                 <div class="news-content" v-html="htmlContent"></div>
                 <WordList :words="wordList"></WordList>
             </template>

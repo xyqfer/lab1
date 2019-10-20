@@ -6,10 +6,8 @@
             </template>
             <template #content>
                 <div class="article-item" v-for="(item, index) in listData" :key="index">
-                    <div class="article-item__jp">
-                        <span v-html="item.jp"></span>
-                        <a :href="`https://jisho.org/search/${item.raw}`" target="_blank">Jisho</a>
-                    </div>
+                    <div class="article-item__jp" v-html="item.jp"></div>
+                    <TextTranslate :text="item.raw" />
                 </div>
                 <WordList :words="wordList"></WordList>
             </template>

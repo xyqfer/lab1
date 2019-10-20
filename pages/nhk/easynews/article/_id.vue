@@ -19,7 +19,7 @@
                 <div class="news-content">
                     <div class="news-content__item" v-for="(item, index) in htmlContentList" :key="index">
                         <p v-html="item"></p>
-                        <a :href="`https://jisho.org/search/${rawContentList[index]}`" target="_blank">Jisho</a>
+                        <TextTranslate :text="rawContentList[index]" />                    
                         <textarea rows="4" class="news-content__input"></textarea>
                     </div>
                 </div>
