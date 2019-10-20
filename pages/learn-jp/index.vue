@@ -24,6 +24,9 @@
                     <a href="/komachi" class="link" target="_blank">
                         発言小町
                     </a>
+                    <a href="/hatena/list" class="link" target="_blank">
+                        はてな匿名ダイアリー
+                    </a>
                     <a href="/learn-jp/grammar" class="link" target="_blank">
                         JP Grammar
                     </a>
