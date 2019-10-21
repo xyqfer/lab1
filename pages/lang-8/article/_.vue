@@ -49,7 +49,7 @@ export default {
         let zhContent = $('#body_show_ori').html().split('<br>').filter(isValidItem);
         zhContent = [title].concat(zhContent);
 
-        const rawJPContent = $('#body_show_mo').html().replace(/<br>/g, '|');
+        const rawJPContent = $('#body_show_mo').html().replace(/<br>/g, '|').replace(/\n/g, '').trim();
         const rawJPContentList = $('#body_show_mo').html().split('<br>').filter(isValidItem);
         const translatedData = await $axios({
             url: `${process.env.API_HOST}/api/v1/furigana/translate`,

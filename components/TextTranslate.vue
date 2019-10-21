@@ -1,10 +1,11 @@
 <template>
     <div class="translate-container">
-        <form class="jisho-form" action="https://jisho.org/search" method="post" target="_blank">
+        <form class="item" action="https://jisho.org/search" method="post" target="_blank">
             <input class="hide" type="text" :value="text" name="keyword">
             <button type="submit">Jisho</button>
         </form>
-        <a :href="`https://translate.google.cn/#view=home&op=translate&sl=ja&tl=zh-CN&text=${text}`" target="_blank">Google Translate</a>
+        <a class="item" :href="`https://translate.google.cn/#view=home&op=translate&sl=ja&tl=zh-CN&text=${text}`" target="_blank">Google Translate</a>
+        <button :class="{item: true, hide: !isVoiceReady}" @click="speechSynthesis(text)">Speech Synt</button>
     </div>
 </template>
 
@@ -16,6 +17,30 @@ export default {
             default: '',
         },
     },
+
+    data() {
+        return {
+            isVoiceReady: false,
+        };
+    },
+
+    mounted() {
+        setTimeout(() => {
+            this.isVoiceReady = true;
+        }, 1000);
+    },
+
+    methods: {
+        speechSynthesis(text) {
+            const voice = speechSynthesis.getVoices().find(item => {
+                return item.name === 'Kyoko';
+            });
+            let ssu = new SpeechSynthesisUtterance();
+            ssu.text = text;
+            ssu.voice = voice;
+            speechSynthesis.speak(ssu);
+        },
+    },
 }
 </script>
 
@@ -24,7 +49,7 @@ export default {
     display: flex;
 }
 
-.jisho-form {
+.item {
     margin-right: 20px;
 }
 

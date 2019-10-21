@@ -34,7 +34,7 @@ export default {
         const endpoint = `${process.env.API_HOST}/graphql${process.env.GRAPHQL_TOKEN}`;
         const query = `
             query {
-                NHKWebNews(descending:createdAt, limit: 20) {
+                NHKWebNews(descending:createdAt, limit: 50) {
                     title
                     objectId
                 }

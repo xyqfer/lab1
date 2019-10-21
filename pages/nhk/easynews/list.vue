@@ -32,7 +32,7 @@ export default {
     async asyncData({ params, query, $axios }) {
         const { data } = await $axios({
             method: 'get',
-            url: `${process.env.API_HOST}/api/v1/nhk/easynews`,
+            url: `${process.env.API_HOST}/api/v1/nhk/easynews?limit=50`,
         });
 
         return {
