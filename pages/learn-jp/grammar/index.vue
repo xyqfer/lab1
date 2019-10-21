@@ -9,17 +9,32 @@
                     <a href="/learn-jp/grammar/level/5" class="link" target="_blank">
                         N5
                     </a>
+                    <a href="/learn-jp/grammar/level/random/5" class="link" target="_blank">
+                        N5 Random
+                    </a>
                     <a href="/learn-jp/grammar/level/4" class="link" target="_blank">
                         N4
+                    </a>
+                    <a href="/learn-jp/grammar/level/random/4" class="link" target="_blank">
+                        N4 Random
                     </a>
                     <a href="/learn-jp/grammar/level/3" class="link" target="_blank">
                         N3
                     </a>
+                    <a href="/learn-jp/grammar/level/random/3" class="link" target="_blank">
+                        N3 Random
+                    </a>
                     <a href="/learn-jp/grammar/level/2" class="link" target="_blank">
                         N2
                     </a>
+                    <a href="/learn-jp/grammar/level/random/2" class="link" target="_blank">
+                        N2 Random
+                    </a>
                     <a href="/learn-jp/grammar/level/1" class="link" target="_blank">
                         N1
+                    </a>
+                    <a href="/learn-jp/grammar/level/random/1" class="link" target="_blank">
+                        N1 Random
                     </a>
                 </div>
             </template>
