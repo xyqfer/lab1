@@ -2,7 +2,7 @@
     <div>
         <Render0>
             <template #title>
-                {{title}}
+                <a :href="`http://lang-8.com/${userId}/journals/${articleId}`" target="_blank">{{title}}</a>
             </template>
             <template #content>
                 <div class="article-item" v-for="(item, index) in listData" :key="index">
@@ -75,6 +75,8 @@ export default {
             title,
             listData,
             wordList,
+            userId, 
+            articleId,
         };
     },
 }
