@@ -18,7 +18,11 @@
                             <div class="article-item__jp">
                                 <span v-html="example.jp"></span>
                             </div>
-                            <div v-html="example.zh"></div>
+                            <div 
+                                :class="{hide: example.hide}" 
+                                v-html="example.zh"
+                                @click="example.hide = false;"
+                            ></div>
                         </div>
                     </div>
                 </div>
@@ -67,6 +71,7 @@ export default {
                     example.push({
                         raw,
                         zh,
+                        hide: true,
                     });
                     rawList.push(raw);
                 } else {
@@ -75,6 +80,7 @@ export default {
                         example.push({
                             raw,
                             zh,
+                            hide: true,
                         });
                         rawList.push(raw);
                     });
@@ -137,5 +143,9 @@ export default {
 
 .example-item {
     margin-bottom: 20px;
+}
+
+.hide {
+    opacity: 0;
 }
 </style>
