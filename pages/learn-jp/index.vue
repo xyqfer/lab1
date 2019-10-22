@@ -18,6 +18,9 @@
                     <a href="/ANNnewsCH/list" class="link" target="_blank">
                         ANNnewsCH
                     </a>
+                    <a href="/tbs" class="link" target="_blank">
+                        TBS News
+                    </a>
                     <a href="/lang-8/journals/1378154" class="link" target="_blank">
                         lang-8 oz
                     </a>

@@ -5,11 +5,10 @@
                 {{title}}
             </template>
             <template #content>
-                <div class="article-item" v-for="item in listData" :key="item.title">
-                    <div>{{item.title}}</div>
+                <div class="article-item" v-for="(item, index) in listData" :key="item.title">
+                    <div>{{index}}. {{item.title}}</div>
                     <TextTranslate :text="`${item.title} ${item.content}`" />
                     <div v-html="item.htmlContent"></div>
-                    <TextTranslate :text="`${item.title} ${item.content}`" />
                 </div>
             </template>
         </Render0>

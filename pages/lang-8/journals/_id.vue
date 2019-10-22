@@ -17,9 +17,9 @@
                 </div>
                 <div>
                     <template v-if="page > 1">
-                        <div><a :href="`/lang-8/journals/${id}?page=${page - 1}`" target="_blank">上一页</a></div> <br />
+                        <div><a :href="`/lang-8/journals/${id}?page=${page - 1}`">上一页</a></div> <br />
                     </template>
-                    <div><a :href="`/lang-8/journals/${id}?page=${page + 1}`" target="_blank">下一页</a></div> <br />
+                    <div><a :href="`/lang-8/journals/${id}?page=${page + 1}`">下一页</a></div> <br />
                 </div>
             </template>
         </Render0>
