@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import speak from '~/utils/speak';
+
 export default {
     props: {
         text: {
@@ -32,13 +34,7 @@ export default {
 
     methods: {
         speechSynthesis(text) {
-            const voice = speechSynthesis.getVoices().find(item => {
-                return item.name === 'Kyoko';
-            });
-            let ssu = new SpeechSynthesisUtterance();
-            ssu.text = text;
-            ssu.voice = voice;
-            speechSynthesis.speak(ssu);
+            speak(text);
         },
     },
 }

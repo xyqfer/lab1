@@ -6,7 +6,7 @@
                     {{word.furigana}}
                 </div>
                 <div class="word-item">
-                    {{word.text}}
+                    {{word.text}} <button @click="speakText(word.text)">Speak</button>
                 </div>
             </div>
             <div class="word-reset">
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import speak from '~/utils/speak';
+
 export default {
     props: {
         words: {
@@ -69,6 +71,10 @@ export default {
                     count: this.wordList.length,
                 }),
             });
+        },
+
+        speakText(text) {
+            speak(text);
         },
     },
 }
