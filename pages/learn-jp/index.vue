@@ -24,6 +24,9 @@
                     <a href="/lang-8/journals/1378154" class="link" target="_blank">
                         lang-8 oz
                     </a>
+                    <a href="/wikihow" class="link" target="_blank">
+                        wikiHow
+                    </a>
                     <a href="/komachi" class="link" target="_blank">
                         発言小町
                     </a>

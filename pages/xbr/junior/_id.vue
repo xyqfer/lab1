@@ -9,7 +9,11 @@
                     <div class="article-item__jp">
                         <span v-html="item.jp"></span>
                     </div>
-                    <div v-html="item.zh"></div>
+                    <div 
+                        :class="{hide: item.hide}"
+                        v-html="item.zh"
+                        @click="item.hide = false;"
+                    ></div>
                 </div>
             </template>
         </Render0>
@@ -77,6 +81,7 @@ export default {
                     listData.push({
                         jp: japanruby($item1.text()),
                         zh: $li2.eq(index).text(),
+                        hide: true,
                     });
                 });
             }
@@ -100,5 +105,9 @@ export default {
             margin-bottom: 10px;
         }
     }
+}
+
+.hide {
+    opacity: 0;
 }
 </style>
