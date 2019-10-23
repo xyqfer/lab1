@@ -57,7 +57,8 @@ export default {
         });
         const { wordList, htmlContent } = parseFurigana(translatedData.data.data.list);
 
-        const videoUrl = 'https://streams.tbs.co.jp/flvfiles/_definst_' + response.data.match(/window\.movieNews='(.+?)';/)[1] + '/playlist.m3u8';
+        const tbsVideoUrl = 'https://streams.tbs.co.jp/flvfiles/_definst_' + response.data.match(/window\.movieNews='(.+?)';/)[1] + '/playlist.m3u8';
+        const videoUrl = `${process.env.MEDIA_PROXY}${encodeURIComponent(tbsVideoUrl)}`;
 
         return {
             title,
