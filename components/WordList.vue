@@ -2,7 +2,7 @@
     <div>
         <div class="word-list" v-if="wordList.length > 0">
             <div class="word-wrap" v-for="(word, index) in wordList" :key="index">
-                <div :class="{'word-item': true, hide: !word.showFurigana}" @click="toggleFurigana(index)">
+                <div :class="{'word-item': true, hide: !word.showFurigana}" @click="toggleFurigana(index, $event)">
                     {{word.furigana}}
                 </div>
                 <div class="word-item">
@@ -49,9 +49,14 @@ export default {
             });
         },
 
-        toggleFurigana(index) {
+        toggleFurigana(index, { target }) {
             const state = !this.wordList[index].showFurigana;
             this.wordList[index].showFurigana = state;
+
+            window.scrollBy({
+                top: target.clientHeight + 10,
+                behavior: 'smooth',
+            });
         },
 
         resetWordList() {

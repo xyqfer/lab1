@@ -10,7 +10,11 @@
                         <span v-html="item.jp"></span>
                         <a :href="`https://jisho.org/search/${item.raw}`" target="_blank">Jisho</a>
                     </div>
-                    <div v-html="item.zh"></div>
+                    <div 
+                        :class="{hide: item.hide}" 
+                        v-html="item.zh"
+                        @click="item.hide = false;"
+                    ></div>
                 </div>
                 <WordList :words="wordList"></WordList>
             </template>
@@ -68,6 +72,7 @@ export default {
                 jp: item,
                 zh: zhContent[index],
                 raw: rawJPContentList[index],
+                hide: true,
             };
         });
 
@@ -91,5 +96,9 @@ export default {
             margin-bottom: 10px;
         }
     }
+}
+
+.hide {
+    opacity: 0;
 }
 </style>
