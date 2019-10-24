@@ -42,7 +42,7 @@ export default {
     },
 
     async asyncData({ query }) {
-        let { offset = 0, count = 5, } = query;
+        let { offset = 0, count = 10, } = query;
         offset = parseInt(offset);
         count = parseInt(count);
 
