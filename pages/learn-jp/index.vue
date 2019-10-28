@@ -24,6 +24,9 @@
                     <a href="/lang-8/journals/1378154" class="link" target="_blank">
                         lang-8 oz
                     </a>
+                    <a href="/HowToBeAProgrammer/list" class="link" target="_blank">
+                        How to be a Programmer
+                    </a>
                     <a href="/wikihow" class="link" target="_blank">
                         wikiHow
                     </a>
