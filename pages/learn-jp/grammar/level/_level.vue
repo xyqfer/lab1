@@ -5,11 +5,14 @@
                 {{title}}
             </template>
             <template #content>
-                <div class="link-container" v-for="(item, index) in listData" :key="item.id">
+                <div class="link-container" v-for="(item, index) in listData" :key="index">
                     {{index + 1}}. <a :href="`/learn-jp/grammar/level/view?id=${item.id}&level=${level}`" target="_blank">
                         {{item.grammar}}
                     </a>
-                    <div>
+                    <div
+                        :class="{hide: item.hide}" 
+                        @click="item.hide = false;"
+                    >
                         {{item.mean}}
                     </div>
                 </div>
@@ -40,8 +43,12 @@ export default {
         `;
 
         const data = await request(endpoint, query);
+        const listData = data[dbName].map((item) => {
+            item.hide = true;
+            return item;
+        });
         return {
-            listData: data[dbName],
+            listData,
             title: `JP Grammar N${level}`,
             level,
         };
@@ -52,5 +59,9 @@ export default {
 <style lang="scss" scoped>
 .link-container {
     margin-bottom: 30px;
+}
+
+.hide {
+    opacity: 0;
 }
 </style>

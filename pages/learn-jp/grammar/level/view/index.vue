@@ -25,6 +25,7 @@
                             ></div>
                         </div>
                     </div>
+                    <div v-html="item.explain"></div>
                 </div>
                 <div ref="footer"></div>
             </template>
@@ -62,6 +63,7 @@ export default {
             const usage = $elem.find('.mark1').text();
             const mean = $elem.find('.mark2-1').text();
             let example = [];
+            let explain = '';
 
             $elem.find('dl.toggle1 > dd > ul > li').each(function() {
                 const originText = $(this).text();
@@ -87,10 +89,19 @@ export default {
                 }
             });
 
+            $elem.find('dl.toggle1 > dt').each(function() {
+                const $elem = $(this);
+
+                if ($elem.text().trim() === '解析') {
+                    explain = $elem.next('dd').html();
+                }
+            });
+
             grammarInfo.push({
                 usage,
                 mean,
                 example,
+                explain,
             });
         });
 
