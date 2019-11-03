@@ -42,6 +42,9 @@
                     <a href="/xbr" class="link" target="_blank">
                         新标日
                     </a>
+                    <a href="/anki/n2" class="link" target="_blank">
+                        Anki N2
+                    </a>
                 </div>
             </template>
         </Render0>
